@@ -109,7 +109,7 @@ def user_choice(choice, user):
         summ = input('\nAmount to be withdraw:')
         trans = withdraw(user, summ)
         filename = str(user['login']) + '_transactions.data'
-        with open(filename, 'w') as f:
+        with open(filename, 'a') as f:
         	json.dump(summ, f)
         	f.write('\n')
         print(trans)
@@ -117,7 +117,7 @@ def user_choice(choice, user):
         summ = input('\nEnter the replenishment sum:')
         trans = replenishment(user, summ)
         filename = str(user['login']) + '_transactions.data'
-        with open(filename, 'w') as f:
+        with open(filename, 'a') as f:
         	json.dump(summ, f)
         	f.write('\n')
         print(trans)     
