@@ -57,7 +57,7 @@ def login_check(login):
 		users = json.load(f)
 	for user in users:
 		if login == user['login']:
-			return user		
+			return user
 
 def password_check(login, password):
 	if password == login['password']:
