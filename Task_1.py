@@ -57,12 +57,11 @@ def login_check(login):
 		users = json.load(f)
 	for user in users:
 		if login == user['login']:
-			return user	
+			return user		
 
 def password_check(login, password):
 	if password == login['password']:
 		return True
-	return False
 	
 def check_balance(user):
 	filename = str(user['login']) + '_balance.data'
@@ -82,11 +81,11 @@ def withdraw(user, summ):
 				balance = balance - summ
 				with open(filename, 'w') as f:
 					json.dump(balance, f)
-				return 'You withdrew ' + str(summ) + '.'
+				return '\nYou withdrew ' + str(summ) + '.'
 			else:
-				return 'Not enough money!'
+				return '\nNot enough money!'
 		else:
-			print('Enter a positive number!')    
+			print('\nEnter a positive number!')    
 
 def replenishment(user, summ):
 	filename = str(user['login']) + '_balance.data'
@@ -99,15 +98,15 @@ def replenishment(user, summ):
 			balance = balance + summ
 			with open(filename, 'w') as f:
 				json.dump(balance, f)
-			return 'You have deposited the amount ' + str(summ) + '.'
+			return '\nYou have deposited the amount ' + str(summ) + '.'
 		else:
-			return 'Enter a positive number!'
+			return '\nEnter a positive number!'
 
 def user_choice(choice, user):
     if choice == 1:
-        print(f'Your balance: {check_balance(user)}.')
+        print(f'\nYour balance: {check_balance(user)}.')
     elif choice == 2:
-        summ = input('Amount to be withdraw:')
+        summ = input('\nAmount to be withdraw:')
         trans = withdraw(user, summ)
         filename = str(user['login']) + '_transactions.data'
         with open(filename, 'w') as f:
@@ -115,7 +114,7 @@ def user_choice(choice, user):
         	f.write('\n')
         print(trans)
     elif choice == 3:
-        summ = input('Enter the replenishment sum:')
+        summ = input('\nEnter the replenishment sum:')
         trans = replenishment(user, summ)
         filename = str(user['login']) + '_transactions.data'
         with open(filename, 'w') as f:
@@ -126,16 +125,16 @@ def user_choice(choice, user):
 def start():
 	users()
 	balance()
-	login_test = str(input('Enter login:'))
+	login_test = str(input('Enter login: '))
 	user = login_check(login_test)
-	password_test = str(input('Enter password:'))
+	password_test = str(input('Enter password: '))
 	if password_check(user, password_test):
 		while True:
-			choice = int(input('\nSelect item:\n1. Check balance\n2. Withdraw money\n3. Deposit cash\n4. Exit\n\nYour choice:'))
+			choice = int(input('\nSelect item:\n1. Check balance\n2. Withdraw money\n3. Deposit cash\n4. Exit\n\nYour choice: '))
 			if choice == 4:
 				break
 			user_choice(choice, user)
 	else:
-		print('User {user} not found!')
+		print(f'User {user} not found!')
 
 start()
