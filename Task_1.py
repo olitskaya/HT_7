@@ -135,6 +135,6 @@ def start():
 				break
 			user_choice(choice, user)
 	else:
-		print(f'User {user} not found!')
+		print(f'User {user['login']} not found!')
 
 start()
