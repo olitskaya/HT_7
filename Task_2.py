@@ -19,11 +19,8 @@
 # В разі необхідності заокруглення одного чи обох
 # параметрів - дивіться на свій розсуд.
 
-import json
-
 def start(filename, symbols):
-	with open(filename, 'r') as f:
-		text = json.load(f)
+	text = open(filename, 'r')
 	s = []	
 	for i in text:
 		s.append(i)	
