@@ -57,9 +57,11 @@ def login_check(login):
 		users = json.load(f)
 	for user in users:
 		if login == user['login']:
-			return user
+			return user	
 
 def password_check(login, password):
+	if not login:
+		return 
 	if password == login['password']:
 		return True
 	
@@ -103,24 +105,24 @@ def replenishment(user, summ):
 			return '\nEnter a positive number!'
 
 def user_choice(choice, user):
-    if choice == 1:
-        print(f'\nYour balance: {check_balance(user)}.')
-    elif choice == 2:
-        summ = input('\nAmount to be withdraw:')
-        trans = withdraw(user, summ)
-        filename = str(user['login']) + '_transactions.data'
-        with open(filename, 'a') as f:
-        	json.dump(summ, f)
-        	f.write('\n')
-        print(trans)
-    elif choice == 3:
-        summ = input('\nEnter the replenishment sum:')
-        trans = replenishment(user, summ)
-        filename = str(user['login']) + '_transactions.data'
-        with open(filename, 'a') as f:
-        	json.dump(summ, f)
-        	f.write('\n')
-        print(trans)     
+	if choice == 1:
+		print(f'\nYour balance: {check_balance(user)}.')
+	elif choice == 2:
+		summ = input('\nAmount to be withdraw:')
+		trans = withdraw(user, summ)
+		filename = str(user['login']) + '_transactions.data'
+		with open(filename, 'w') as f:
+			json.dump(summ, f)
+			f.write('\n')
+		print(trans)
+	elif choice == 3:
+		summ = input('\nEnter the replenishment sum:')
+		trans = replenishment(user, summ)
+		filename = str(user['login']) + '_transactions.data'
+		with open(filename, 'w') as f:
+			json.dump(summ, f)
+			f.write('\n')
+		print(trans)     
 
 def start():
 	users()
